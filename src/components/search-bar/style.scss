@@ -1,0 +1,27 @@
+.search-bar__wrapper {
+    width: 365px;
+    border: 2px solid #f7f7f7;
+    border-radius: 13px;
+    padding: 4px;
+    display: flex;
+    flex-direction: row;
+
+    .icon-search {
+        button {
+            span {
+                color: #c7c7c7;
+            }
+        }
+    }
+
+    input {
+        width: 100%;
+        border: none;
+        &:focus-visible {
+            outline: none;
+        }
+        &::placeholder {
+            color: #c7c7c7;
+        }
+    }
+}
