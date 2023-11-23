@@ -1,10 +1,10 @@
+@import '../scss/colors.scss';
 
 body {
-    margin: 2rem !important;
 }
 
-h1 {
-    font-weight: 600;
+span {
+    transition: 0.2s all ease-in-out;
 }
 
 button {
@@ -14,8 +14,12 @@ button {
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: 0.2s all ease;
 
-    :hover {
+    &:hover {
         cursor: pointer;
+        span {
+            color: $colorActive;
+        }
     }
 }

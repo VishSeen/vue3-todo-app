@@ -1,16 +1,24 @@
+@import '../../assets/scss/colors.scss';
+
 .search-bar__wrapper {
-    width: 365px;
-    border: 2px solid #f7f7f7;
-    border-radius: 13px;
+    width: -webkit-fill-available;
+    height: 40px;
+    color: #52616B;
+    border: 1px solid $colorGreyLight;
+    border-radius: 9px;
     padding: 4px;
     display: flex;
     flex-direction: row;
+    align-items: center;
+    margin-right: 10px;
+    @media screen and (min-width: 600px) {
+        width: 315px;
+    }
 
-    .icon-search {
-        button {
-            span {
-                color: #c7c7c7;
-            }
+    &:focus-within {
+        border-color: $colorActive;
+        button span {
+            color: $colorActive
         }
     }
 

@@ -1,0 +1,46 @@
+@import '../../assets/scss/colors.scss';
+
+.todo-header {
+    width: 100%;
+    padding: 6px 0;
+    margin-bottom: 8px;
+    // border-bottom: 1px solid;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    @media screen and (min-width: 600px) {
+        padding: 10px 0;
+        margin-bottom: 0;
+    }
+
+    &.completed {
+        border-color: $colorComplete;
+    }
+}
+
+.todo-header p {
+    font-size: 15px;
+    color: $colorTextDark;
+    opacity: 0.5;
+    @media screen and (min-width: 600px) {
+        font-size: 16px;
+    }
+}
+
+.todo-header .ic-count {
+    padding: 2px 11px;
+    border-radius: 4px;
+    background-color: $colorGreyLight;
+    @media screen and (min-width: 600px) {
+        padding: 2px 11px;
+    }
+
+    span {
+        font-size: 12px;
+        color: $colorTextDark;
+        opacity: 0.5;
+        @media screen and (min-width: 600px) {
+            font-size: 13px;
+        }
+    }
+}

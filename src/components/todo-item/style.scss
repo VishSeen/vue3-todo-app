@@ -1,0 +1,72 @@
+@import '../../assets/scss/colors.scss';
+
+.todo-item__wrapper {
+    width: 100%;
+    height: 100%;
+    background-color: $colorWhite;
+    border: 1.2px solid $colorGreyLight;
+    border-radius: 10px;
+    box-shadow: 0px 1px 13px 0px rgba(166, 166, 166, 0.12);
+    display: block;
+    padding: 4px 8px;
+    padding-left: 15px;
+    padding-right: 0;
+
+    @media screen and (min-width: 600px) {
+        padding: 10px 23px;
+        padding-right: 4px;
+    }
+
+    :hover {
+        cursor: pointer;
+    }
+
+    &.completed {
+        background-color: $colorComplete;
+        p {
+            text-decoration: line-through;
+        }
+    }
+}
+
+
+.todo-item__wrapper .title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    p {
+        font-size: 13px;
+        width: 100%;
+        @media screen and (min-width: 600px) {
+            font-size: 15px;
+        }
+    }
+
+    .btn-check {
+        margin-right: 14px;
+    }
+
+    button {
+        span {
+            font-size: 20px;
+        }
+    }
+}
+
+.todo-item__wrapper .description {
+    margin-bottom: 10px;
+    margin-right: 4px;
+    @media screen and (min-width: 600px) {
+        margin-bottom: 20px;
+    }
+
+    p {
+        font-size: 12px;
+        font-weight: 300;
+        opacity: 0.7;
+        @media screen and (min-width: 600px) {
+            font-size: 13px;
+        }
+    }
+}

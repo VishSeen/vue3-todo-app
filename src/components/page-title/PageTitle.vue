@@ -1,4 +1,6 @@
 <script>
+import './style.scss';
+
  export default {
     name: "PageTitle",
     props: {

@@ -1,28 +1,43 @@
-
 <script>
+import './style.scss'
+import ButtonIcon from '../button-icon/ButtonIcon.vue'
+
 export default {
-    components: { ButtonIcon },
-    props: {
-        id: Number,
-        label: String,
-        isChecked: Boolean
+  components: { ButtonIcon },
+  props: {
+    id: Number,
+    label: String,
+    description: String,
+    isChecked: Boolean
+  },
+  data() {
+    return {
+        isCompleted: this.isChecked
     }
+  },
+  methods: {
+  }
 }
 </script>
 
-
 <template>
-    <div class="todo-item">
-        <div class="btn-check">
+  <div class="todo-item__wrapper" :class="isCompleted ? 'completed' : ''">
+    <div class="title">
+      <div class="btn-check">
+        <input type="checkbox" :checked="isCompleted" v-model="isCompleted"/>
+      </div>
 
-        </div>
+      <p>
+        {{ label }}
+      </p>
 
-        <p class="txt-label">
-            {{ label }}
-        </p>
-
-        <div class="btn-edit">
-            <ButtonIcon icon="more_vert" />
-        </div>
+      <ButtonIcon icon="more_vert" />
     </div>
+
+    <div v-if="description" class="description">
+      <p>
+        {{ description }}
+      </p>
+    </div>
+  </div>
 </template>

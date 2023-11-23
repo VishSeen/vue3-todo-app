@@ -1,16 +1,15 @@
 <script>
-import './style.scss'
+import './style.scss';
+import ButtonIcon from '../button-icon/ButtonIcon.vue';
+
+export default {
+    components: { ButtonIcon }
+}
 </script>
 
 <template>
     <div class="search-bar__wrapper">
-        <div class="icon-search">
-            <button>
-                <span class="material-symbols-outlined">
-                    search
-                </span>
-            </button>
-        </div>
+        <ButtonIcon icon="search"/>
         <input type="text" placeholder="Search..." name="search">
     </div>
 </template>

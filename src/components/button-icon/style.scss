@@ -1,9 +1,21 @@
+@import '../../assets/scss/colors.scss';
+
 .btn-icon {
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
+
+    span {
+        color: $colorIconGrey;
+    }
+    &:hover {
+        &.outlined {
+            border-color: $colorActive;
+        }
+    }
     &.outlined {
-        color: #c7c7c7;
-        border: 2px solid #f7f7f7;
+        color: $colorIconGrey;
+        border: 1px solid $colorGreyLight;
         border-radius: 10px;
+
     }
 }
