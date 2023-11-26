@@ -5,7 +5,7 @@ import ButtonIcon from '../button-icon/ButtonIcon.vue'
 export default {
   components: { ButtonIcon },
   props: {
-    id: Number,
+    id: String,
     label: String,
     description: String,
     isChecked: Boolean
@@ -16,6 +16,12 @@ export default {
     }
   },
   methods: {
+    delete() {
+        this.$emit('delete-task', this.id);
+    },
+    edit() {
+        this.$emit('edit-task', { id: this.id, label: this.label, description: this.description});
+    },
   }
 }
 </script>
@@ -24,14 +30,15 @@ export default {
   <div class="todo-item__wrapper" :class="isCompleted ? 'completed' : ''">
     <div class="title">
       <div class="btn-check">
-        <input type="checkbox" :checked="isCompleted" v-model="isCompleted"/>
+        <input type="checkbox" @change="checked=this.isCompleted" :checked="isCompleted"/>
       </div>
 
       <p>
         {{ label }}
       </p>
 
-      <ButtonIcon icon="more_vert" />
+      <ButtonIcon icon="edit" @click="$emit('edit-task', id)"/>
+      <ButtonIcon icon="delete" @click="this.delete"/>
     </div>
 
     <div v-if="description" class="description">

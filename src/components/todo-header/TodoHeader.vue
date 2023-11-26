@@ -13,7 +13,10 @@ export default {
 
 <template>
     <div class="todo-header" :class="type">
-        <p>{{ title }}</p>
+        <div class="title">
+            <div class="circle"></div>
+            <p>{{ title }}</p>
+        </div>
 
         <div class="ic-count">
             <span>

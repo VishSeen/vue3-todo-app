@@ -12,20 +12,31 @@
     z-index: 99;
 
     @media screen and (min-width: 600px) {
-        padding: 20px 1rem;
+        padding: 20px 2rem;
         display: flex;
         align-items: center;
         justify-content: space-between;
     }
-    @media screen and (min-width: 992px) {
-        padding: 20px 2rem;
-    }
 }
 
 .top-bar .right-side {
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: space-between;
+}
+.top-bar .right-side .filter-dropdown {
+    display: none;
+    position: absolute;
+    top: 48px;
+    right: 0;
+    @media screen and (min-width: 600px) {
+        left: unset;
+    }
+
+    &.visible {
+        display: block;
+    }
 }
 
 
@@ -34,5 +45,80 @@
 
     @media screen and (min-width: 600px) {
         margin: 7rem 2rem;
+    }
+
+    .todo-list {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 13px;
+    }
+
+    .todo-error {
+        p {
+            font-weight: 300;
+            color: $colorIconGrey;
+        }
+    }
+}
+
+
+.modal {
+    position: fixed;
+    bottom: 5rem;
+    width: -webkit-fill-available;
+    height: 400px;
+    background-color: $colorBackground;
+    border-radius: 12px;
+    padding: 24px 16px;
+    margin: 0 14px;
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    @media screen and (min-width: 425px) {
+        width: 300px;
+    }
+    @media screen and (min-width: 600px) {
+        bottom: 6rem;
+        right: 2rem;
+        margin: 0;
+    }
+
+    &.opened {
+        display: flex;
+    }
+
+    .input-container {
+        .title {
+            margin-bottom: 30px;
+        }
+        p {
+            font-size: 14px;
+            color: $colorWhite;
+            opacity: 0.7;
+            margin-bottom: 8px;
+        }
+
+        input {
+            font-size: 16px;
+            color: $colorWhite;
+            padding: 4px 0;
+            width: 100%;
+            border: none;
+            border-bottom: 1px solid $colorWhite;
+            background: transparent;
+
+            &:focus-within {
+                outline: none;
+            }
+        }
+    }
+
+
+    button {
+        width: 100%;
+        padding: 10px;
+        background-color: $colorAccent;
+        border-radius: 4px;
     }
 }

@@ -7,18 +7,25 @@ export default {
   props: {
     type: String,
     todos: Array
+  },
+  edit() {
+    this.$emit
+  },
+  delete() {
+    this.$emit('delete-task');
   }
 }
 </script>
 
 <template>
-    <div class="todo-list">
+    <div class="todo-list" @delete-task="this.delete">
         <TodoItem
-      v-for="item in todos"
-      :key="item.id"
-      :label="item.label"
-      :isChecked="item.isChecked"
-      :description="item.description"
-    />
+            v-for="item in todos"
+            :key="item.id"
+            :label="item.label"
+            :isChecked="item.isChecked"
+            :description="item.description"
+            @delete-task="this.delete"
+        />
     </div>
 </template>

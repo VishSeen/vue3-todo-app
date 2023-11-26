@@ -14,10 +14,8 @@
 
 <template>
     <div class="dropdown">
-        <ul>
-            <li v-for="item in items" :key="item.id">
-                <DropdownItem :label="item.label" @click="item.clickEvent"/>
+        <li v-for="item in items" :key="item.id">
+                <DropdownItem :label="item.label" @click="item.clickEvent(item.label)"/>
             </li>
-        </ul>
     </div>
 </template>
