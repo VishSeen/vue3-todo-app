@@ -11,6 +11,6 @@ export default {
 
 <template>
     <div class="dropdown-item">
-        <button @click="$emit(this.label)">{{ label }}</button>
+        <button @click="this.clickEvent">{{ label }}</button>
     </div>
 </template>
