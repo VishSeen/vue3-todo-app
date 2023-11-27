@@ -1,4 +1,4 @@
-# GENERAL
+# General
 
 A simple todo app as a technical test for Vue JS.
 It has some basic functions like :
@@ -10,9 +10,10 @@ It has some basic functions like :
 ## Dependencies
 Using the current tech.
 
-Node JS : v21.2.0.
-Sass.
-Vue JS.
+1. Node JS : v21.2.0.
+2. Sass.
+3. Vue JS.
+4. UUID (for genration of unique ids)
 
 ## Recommended IDE Setup
 
