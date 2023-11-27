@@ -10,34 +10,32 @@ export default {
     description: String,
     isChecked: Boolean
   },
-  data() {
-    return {
-        isCompleted: this.isChecked
-    }
-  },
   methods: {
     delete() {
         this.$emit('delete-task', this.id);
     },
     edit() {
-        this.$emit('edit-task', { id: this.id, label: this.label, description: this.description});
+        this.$emit('edit-task', { id: this.id, label: this.label, description: this.description });
     },
+    checkedTodo() {
+        this.$emit('checked-task', this.id);
+    }
   }
 }
 </script>
 
 <template>
-  <div class="todo-item__wrapper" :class="isCompleted ? 'completed' : ''">
+  <div class="todo-item__wrapper" :class="isChecked ? 'completed' : ''">
     <div class="title">
       <div class="btn-check">
-        <input type="checkbox" @change="checked=this.isCompleted" :checked="isCompleted"/>
+        <input type="checkbox" @change="this.checkedTodo" :checked="isChecked"/>
       </div>
 
       <p>
         {{ label }}
       </p>
 
-      <ButtonIcon icon="edit" @click="$emit('edit-task', id)"/>
+      <ButtonIcon icon="edit" @click="this.edit"/>
       <ButtonIcon icon="delete" @click="this.delete"/>
     </div>
 
