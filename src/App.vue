@@ -22,35 +22,8 @@ export default {
       inputTitle: '',
       inputDesc: '',
       editBtnDisabled: true,
-      todos: [
-        {
-          id: '1',
-          label: 'Design some UI for Habits app',
-          isChecked: true
-        },
-        {
-          id: '2',
-          label: 'Sketch something in 5mins',
-          isChecked: false
-        },
-        {
-          id: '3',
-          label: 'Clean the turtle pond ASAP !!',
-          isChecked: true
-        },
-        {
-          id: '4',
-          label: 'Hello world.',
-          isChecked: true
-        },
-        {
-          id: '5',
-          label: 'Get some cola at the shop',
-          isChecked: false,
-          description:
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Eget mauris, scelerisque aliquet tortor. Egestas pretium quam pellentesque sagittis ullamcorper augue felis. Eu enim enim, fermentum ac feugiat ornare diam. Sit amet condimentum eget arcu egestas.'
-        }
-      ],
+      todos: [],
+      searchList: [],
       currentTodos: 'All',
       filterDropdownVisible: false,
       filterDropdown: [
@@ -71,13 +44,20 @@ export default {
   },
   methods: {
     addTask(label, desc) {
-      this.todos.push({
-        id: uuid.v4(),
-        label: label,
-        description: desc,
-        isChecked: false
-      })
-      this.modalIsOpened = false
+      if(this.inputTitle !== '') {
+         this.todos.push({
+            id: uuid.v4(),
+            label: label,
+            description: desc,
+            isChecked: false
+         });
+         this.inputTitle = '';
+         this.inputId = '';
+         this.inputDesc = '';
+         this.modalIsOpened = false;
+      } else {
+         alert("Cannot add item as Title seems empty..")
+      }
     },
     addEditedTask() {
       this.todos.filter((item) => {
@@ -86,7 +66,7 @@ export default {
           item.description = this.inputDesc
         }
       })
-      this.inputId = '';
+      this.inputId = ''
       this.inputTitle = ''
       this.inputDesc = ''
       this.modalIsOpened = false
@@ -97,9 +77,7 @@ export default {
           return item
         }
       })
-
-      this.todos = modifiedList
-      console.log(modifiedList)
+      this.todos = modifiedList;
     },
     editTask(value) {
       let { id, label, description } = value
@@ -107,33 +85,39 @@ export default {
       this.inputTitle = label
       this.inputDesc = description
       this.modalIsOpened = true
-      this.editBtnDisabled = false;
+      this.editBtnDisabled = false
     },
     searchTask(value) {
-      console.log(value)
-      this.todos.filter((item) => {
-        console.log(item)
-        return item.label.toLowerCase() == value
-      })
+      if(value !== ' ' || value !== null) {
+         this.searchList = [];
+         this.searchHistory = value;
+         this.todos.forEach(item => {
+            if(item.label.toLowerCase().includes(value.toLowerCase())) {
+               this.searchList.push(item)
+            }
+         })
+      } else {
+         this.searchList = [];
+      }
     },
     openModal() {
-      if(this.modalIsOpened) {
-        this.inputId = '';
-        this.inputTitle = '';
-        this.inputDesc = '';
-        this.editBtnDisabled = true;
-        this.modalIsOpened = false;
+      if (this.modalIsOpened) {
+        this.inputId = ''
+        this.inputTitle = ''
+        this.inputDesc = ''
+        this.editBtnDisabled = true
+        this.modalIsOpened = false
       } else {
-        this.modalIsOpened = true;
+        this.modalIsOpened = true
         if (this.inputTitle !== '') {
-            this.editBtnDisabled = false
+          this.editBtnDisabled = false
         } else {
-            this.editBtnDisabled = true
+          this.editBtnDisabled = true
         }
       }
     },
     filterComplete() {
-      this.currentTodos = 'Completed';
+      this.currentTodos = 'Completed'
     },
     filterAll() {
       this.currentTodos = 'All'
@@ -142,11 +126,11 @@ export default {
       this.currentTodos = 'Ongoing'
     },
     checkedTodo(id) {
-        this.todos.filter(item => {
-            if(item.id === id) {
-                item.isChecked = !item.isChecked;
-            }
-        });
+      this.todos.filter((item) => {
+        if (item.id === id) {
+          item.isChecked = !item.isChecked
+        }
+      })
     }
   }
 }
@@ -159,7 +143,7 @@ export default {
     </div>
 
     <div class="right-side">
-      <SearchBar v-model="searchHistory" @search-change="this.searchTask" />
+      <SearchBar @search-change="this.searchTask" />
 
       <div class="btn-filter">
         <ButtonIcon
@@ -176,21 +160,36 @@ export default {
   </div>
 
   <div class="todo">
-    <TodoHeader :title="currentTodos" :count="todos.length" :type="currentTodos.toLowerCase()" />
+    <TodoHeader :title="currentTodos" :count="searchHistory === '' ? todos.length : searchList.length" :type="currentTodos.toLowerCase()" />
 
     <div class="todo-list__wrapper">
-      <div v-if="todos.length" class="todo-list">
-        <TodoItem
-          v-for="item in this.todos"
-          :id="item.id"
-          :key="item.id"
-          :label="item.label"
-          :isChecked="item.isChecked"
-          :description="item.description"
-          @delete-task="this.deleteTask"
-          @edit-task="this.editTask"
-          @checked-task="this.checkedTodo"
-        />
+      <div v-if="todos.length">
+        <div v-if="this.searchHistory === '' || this.searchHistory === null" class="todo-list">
+          <TodoItem
+            v-for="item in this.todos"
+            :id="item.id"
+            :key="item.id"
+            :label="item.label"
+            :isChecked="item.isChecked"
+            :description="item.description"
+            @delete-task="this.deleteTask"
+            @edit-task="this.editTask"
+            @checked-task="this.checkedTodo"
+          />
+        </div>
+        <div v-else class="todo-list" id="search">
+         <TodoItem
+            v-for="item in this.searchList"
+            :id="item.id"
+            :key="item.id"
+            :label="item.label"
+            :isChecked="item.isChecked"
+            :description="item.description"
+            @delete-task="this.deleteTask"
+            @edit-task="this.editTask"
+            @checked-task="this.checkedTodo"
+          />
+        </div>
       </div>
 
       <div class="todo-error" v-else>
