@@ -22,7 +22,24 @@ export default {
       inputTitle: '',
       inputDesc: '',
       editBtnDisabled: true,
-      todos: [],
+      todos: [
+        {
+            id: '1',
+            label: 'Hello',
+            isChecked: false
+        },
+        {
+            id: '2',
+            label: 'Dog',
+            isChecked: false
+        },
+        {
+            id: '3',
+            label: 'test',
+            isChecked: true
+        }
+        ],
+      currentTodoList: [],
       searchList: [],
       currentTodos: 'All',
       filterDropdownVisible: false,
@@ -41,6 +58,9 @@ export default {
         }
       ]
     }
+  },
+  mounted() {
+    this.currentTodoList = this.todos;
   },
   methods: {
     addTask(label, desc) {
@@ -117,13 +137,20 @@ export default {
       }
     },
     filterComplete() {
-      this.currentTodos = 'Completed'
+      this.currentTodos = 'Completed';
+      this.todos = this.currentTodoList;
+      let checkedTodos = this.todos.filter(item => (item.isChecked));
+      this.todos = checkedTodos;
     },
     filterAll() {
       this.currentTodos = 'All'
+      this.todos = this.currentTodoList;
     },
     filterOngoing() {
       this.currentTodos = 'Ongoing'
+      this.todos = this.currentTodoList;
+      let ongoingList = this.todos.filter(item => (!item.isChecked));
+      this.todos = ongoingList;
     },
     checkedTodo(id) {
       this.todos.filter((item) => {
@@ -167,6 +194,7 @@ export default {
         <div v-if="this.searchHistory === '' || this.searchHistory === null" class="todo-list">
           <TodoItem
             v-for="item in this.todos"
+            v-model="this.todos"
             :id="item.id"
             :key="item.id"
             :label="item.label"
